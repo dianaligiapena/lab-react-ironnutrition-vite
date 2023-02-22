@@ -1,32 +1,44 @@
 import { useState } from 'react'
 import './App.css'
-import { Row, Divider, Button, Col, Card, Input } from 'antd';
+import { Row, Divider, Col } from 'antd';
 import foods from './foods.json'
 import FoodBox from './components/FoodBox';
 import AddFoodForm from './components/AddFoodForm';
+import SearchBar from './components/SearchBar';
 
 function App() {
-  const [foodsState, setFoodsState] = useState(foods) // set - method to change
+  const [foodsState, setFoodsState] = useState(foods) 
+
+  const [showFood, setShowFood] = useState(foods)
 
   const newFood = (added) => {
     const addedFood = [added, ...foodsState];
+
     setFoodsState(addedFood);
+    setShowFood(addedFood);
+  }
+
+  const filterFood = (searchQuery) => {
+    let filteredFood = foodsState.filter(  food => 
+      food.name.toLowerCase().includes(searchQuery.toLowerCase())   );
+
+    setShowFood(filteredFood);
   }
 
   return (
     <div className="App">
-                {/* Display Add Food component here */}
-          <AddFoodForm newFood = {newFood} />
 
-      <Button> Hide Form / Add New Food </Button>
+{/* FIXME: add new food */}
+      <AddFoodForm newFood = {newFood} />
 
-      {/* Display Search component here */}
+{/* FIXME: search bar */}
+      <SearchBar filterFood={filterFood} />
 
-      <Divider>Food List</Divider>
-
+      <Divider>Food List:</Divider>
       <Row style={{ width: '100%', justifyContent: 'center' }}>
-        {/* Render the list of Food Box components here */}
-        {foodsState.map( (food) => {
+
+{/* FIXME: foods list */}
+        {showFood.map( (food) => {
             return (
               <Col>
                 <FoodBox food={food} />
