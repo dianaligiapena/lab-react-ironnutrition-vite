@@ -19,7 +19,7 @@ function App() {
   }
 
   const filterFood = (searchQuery) => {
-    let filteredFood = foodsState.filter(  food => 
+    const filteredFood = foodsState.filter(  food => 
       food.name.toLowerCase().includes(searchQuery.toLowerCase())   );
 
     setShowFood(filteredFood);
@@ -40,7 +40,7 @@ function App() {
 {/* FIXME: foods list */}
         {showFood.map( (food) => {
             return (
-              <Col>
+              <Col key={food.name}  >
                 <FoodBox food={food} />
               </Col>
             )

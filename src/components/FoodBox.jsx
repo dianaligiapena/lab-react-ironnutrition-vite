@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Divider, Button, Col, Card, Input } from 'antd';
+import { Button, Card } from 'antd';
 
 function FoodBox( {food} ) {
   return (
