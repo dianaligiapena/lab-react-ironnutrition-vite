@@ -12,17 +12,24 @@ function App() {
   const [showFood, setShowFood] = useState(foods)
 
   const newFood = (added) => {
-    const addedFood = [added, ...foodsState];
+        const addedFood = [added, ...foodsState];
 
-    setFoodsState(addedFood);
-    setShowFood(addedFood);
+        setFoodsState(addedFood);
+        setShowFood(addedFood);
   }
 
   const filterFood = (searchQuery) => {
-    const filteredFood = foodsState.filter(  food => 
-      food.name.toLowerCase().includes(searchQuery.toLowerCase())   );
+        const filteredFood = foodsState.filter(  food => 
+          food.name.toLowerCase().includes(searchQuery.toLowerCase())   );
 
-    setShowFood(filteredFood);
+        setShowFood(filteredFood);
+  }
+
+  const deleteFood = (name) => {
+        const foodWithoutDeleted = showFood.filter( food  => food.name!== name);
+
+        setFoodsState(foodWithoutDeleted);
+        setShowFood(foodWithoutDeleted);
   }
 
   return (
@@ -40,8 +47,14 @@ function App() {
 {/* FIXME: foods list */}
         {showFood.map( (food) => {
             return (
-              <Col key={food.name}  >
-                <FoodBox food={food} />
+              <Col >
+
+                <FoodBox 
+                    food={food} 
+                    key={food.name}
+                    listDelete={deleteFood}
+                />
+
               </Col>
             )
 
